@@ -1,6 +1,6 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import Episodes from './Episodes';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import Episodes from "./Episodes";
 
 const episodes = [
   {
@@ -45,13 +45,13 @@ const episodes = [
 ];
 
 test("test that Episodes renders", () => {
-    render(<Episodes episodes={[]}/>)
-})
+  render(<Episodes episodes={[]} />);
+});
 
-test("test that Episodes.js renders correctly", () => {
-    const { rerender, queryByTestId, getAllByTestId } = render(<Episodes episodes={[]} />);
+test("test that Episodes.js renders correctly", async () => {
+  const { rerender } = render(<Episodes episodes={[]} />);
 
-    expect(queryByTestId(/episodes/i)).toBeNull();
-    rerender(<Episodes episodes={episodes} />);
-    expect(getAllByTestId(/episodes/i)).toHaveLength(3)
+  expect(screen.queryByTestId(/episodes/i)).toBeNull();
+  rerender(<Episodes episodes={episodes} />);
+  expect(screen.getAllByTestId(/episodes/i)).toHaveLength(3);
 });
